@@ -112,7 +112,7 @@ class Dropout:
     def backward(self, dout):
         return dout * self.mask
 
-
+# 归一化层 
 class BatchNormalization:
     """
     http://arxiv.org/abs/1502.03167

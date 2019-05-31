@@ -8,7 +8,7 @@ from common.multi_layer_net import MultiLayerNet
 from common.util import shuffle_dataset
 from common.trainer import Trainer
 
-(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True) # 这里的x_test是没有用到
 
 # 为了实现高速化，减少训练数据
 x_train = x_train[:500]
@@ -36,7 +36,7 @@ def __train(lr, weight_decay, epocs=50):
 
 
 # 超参数的随机搜索======================================
-optimization_trial = 100
+optimization_trial = 100 # 参数100次
 results_val = {}
 results_train = {}
 for _ in range(optimization_trial):
@@ -45,10 +45,10 @@ for _ in range(optimization_trial):
     lr = 10 ** np.random.uniform(-6, -2)
     # ================================================
 
-    val_acc_list, train_acc_list = __train(lr, weight_decay)
+    val_acc_list, train_acc_list = __train(lr, weight_decay) # 这里每次的训练和测试数据是固定的，也就是变量是lr，和权重衰减。
     print("val acc:" + str(val_acc_list[-1]) + " | lr:" + str(lr) + ", weight decay:" + str(weight_decay))
     key = "lr:" + str(lr) + ", weight decay:" + str(weight_decay)
-    print('val acc 的内容',val_acc_list)
+    # print('val acc 的内容',val_acc_list)
     results_val[key] = val_acc_list
     results_train[key] = train_acc_list
 
@@ -59,6 +59,7 @@ col_num = 5
 row_num = int(np.ceil(graph_draw_num / col_num))
 i = 0
 
+# acc list里面最后一个值是最后运行 一个loop的acc值，并不一定是最大的， 只是参数执行到最后的值
 for key, val_acc_list in sorted(results_val.items(), key=lambda x:x[1][-1], reverse=True):
     print("Best-" + str(i+1) + "(val acc:" + str(val_acc_list[-1]) + ") | " + key)
 

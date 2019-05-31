@@ -36,12 +36,12 @@ class MultiLayerNet:
         # 生成层
         activation_layer = {'sigmoid': Sigmoid, 'relu': Relu}
         self.layers = OrderedDict()
-        for idx in range(1, self.hidden_layer_num+1):
+        for idx in range(1, self.hidden_layer_num+1): # 每一层都是差不多的，
             self.layers['Affine' + str(idx)] = Affine(self.params['W' + str(idx)],
                                                       self.params['b' + str(idx)])
             self.layers['Activation_function' + str(idx)] = activation_layer[activation]()
 
-        idx = self.hidden_layer_num + 1
+        idx = self.hidden_layer_num + 1 # 输出层
         self.layers['Affine' + str(idx)] = Affine(self.params['W' + str(idx)],
             self.params['b' + str(idx)])
 

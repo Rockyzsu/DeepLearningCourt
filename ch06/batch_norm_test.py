@@ -41,7 +41,8 @@ def __train(weight_init_std):
             grads = _network.gradient(x_batch, t_batch)
             optimizer.update(_network.params, grads)
     
-        if i % iter_per_epoch == 0:
+        # 只是为了显示作用，实际可以不用？
+        if i % iter_per_epoch == 0: 
             train_acc = network.accuracy(x_train, t_train)
             bn_train_acc = bn_network.accuracy(x_train, t_train)
             train_acc_list.append(train_acc)
